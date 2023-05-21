@@ -10022,11 +10022,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Samedusa\\Desktop\\AdminPanel-CRUDBasics\\PustokTemplate.csproj",
+      "projectUniqueName": "C:\\Users\\Samedusa\\Desktop\\AdminPanel-FileUpload\\PustokTemplate.csproj",
       "projectName": "PustokTemplate",
-      "projectPath": "C:\\Users\\Samedusa\\Desktop\\AdminPanel-CRUDBasics\\PustokTemplate.csproj",
+      "projectPath": "C:\\Users\\Samedusa\\Desktop\\AdminPanel-FileUpload\\PustokTemplate.csproj",
       "packagesPath": "C:\\Users\\Samedusa\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Samedusa\\Desktop\\AdminPanel-CRUDBasics\\obj\\",
+      "outputPath": "C:\\Users\\Samedusa\\Desktop\\AdminPanel-FileUpload\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Samedusa\\AppData\\Roaming\\NuGet\\NuGet.Config",

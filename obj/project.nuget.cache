@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "M3O32bfAnZ/psZWJ5dE0UVjGuOJ/Z1IcCi2xAVeIteCWazpBX57WCp37MgKAda18Hzqi58qe8lU59hvAlzbDKg==",
+  "dgSpecHash": "fLwbMRhDzTXAnrpCN0dzSVmRGFxoIdgZ4RqpZxP9MwgfZvV1iT9DAYZlAnY04gsL9s2jWjNUNgPwO1JCvWxhrw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Samedusa\\Desktop\\AdminPanel-CRUDBasics\\PustokTemplate.csproj",
+  "projectFilePath": "C:\\Users\\Samedusa\\Desktop\\AdminPanel-FileUpload\\PustokTemplate.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Samedusa\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\Samedusa\\.nuget\\packages\\messagepack\\2.1.152\\messagepack.2.1.152.nupkg.sha512",

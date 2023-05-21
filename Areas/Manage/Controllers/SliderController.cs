@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using PustokTemplate.DAL;
+using PustokTemplate.Helpers;
 using PustokTemplate.Models;
 using PustokTemplate.ViewModels;
 
@@ -11,10 +12,12 @@ namespace PustokTemplate.Areas.Manage.Controllers
     public class SliderController : Controller
     {
         private readonly PustokDbContext _context;
+        private readonly IWebHostEnvironment _environment;
 
-        public SliderController(PustokDbContext context)
+        public SliderController(PustokDbContext context, IWebHostEnvironment environment)
         {
             _context = context;
+            _environment = environment;
         }
         public IActionResult Index(int page=1)
         {
@@ -34,6 +37,11 @@ namespace PustokTemplate.Areas.Manage.Controllers
         {
             if (!ModelState.IsValid)
                 return View();
+
+            if(slider.ImageFile == null)
+            {
+                ModelState.AddModelError("ImageFile", "ImageFile is required!");
+            }
 
             if(slider.ImageFile.ContentType!="image/jpeg" && slider.ImageFile.ContentType != "image/png")
             {
@@ -67,9 +75,64 @@ namespace PustokTemplate.Areas.Manage.Controllers
                 }
             }
 
-            slider.Url = slider.ImageFile.Name;
+
+            slider.Url = FileManager.Save(_environment.WebRootPath,"uploads/sliders",slider.ImageFile);
 
             _context.Sliders.Add(slider);
+            _context.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult Edit(int id)
+        {
+            Slider slider = _context.Sliders.Find(id);
+
+            if(slider == null)
+                return View("Error");
+
+            return View(slider);
+        }
+
+        [HttpPost]
+        [AutoValidateAntiforgeryToken]
+        public IActionResult Edit(Slider slider)
+        {
+            if(ModelState.IsValid)
+                return View();
+
+            string fileName = null;
+            if(slider.ImageFile != null)
+            {
+                if (slider.ImageFile.ContentType != "image/jpeg" && slider.ImageFile.ContentType != "image/png")
+                {
+                    ModelState.AddModelError("ImageFile", "Content type must includes jpeg or png");
+                    return View();
+                }
+
+                if (slider.ImageFile.Length > 2097152)
+                {
+                    ModelState.AddModelError("ImageFile", "File size cant be higher than 2mb");
+                    return View();
+                }
+
+                fileName = FileManager.Save(_environment.WebRootPath, "uploads/sliders", slider.ImageFile);
+            }
+
+            Slider existSlider = _context.Sliders.Find(slider.Id);
+
+            if(existSlider == null)
+                return View("Error");
+
+            existSlider.Order = slider.Order;
+            existSlider.Header = slider.Header;
+            existSlider.Desc = slider.Desc;
+            existSlider.Button = slider.Button;         
+            if(fileName != null)
+            {
+                existSlider.Url = fileName;
+            }
+
             _context.SaveChanges();
 
             return RedirectToAction("Index");
